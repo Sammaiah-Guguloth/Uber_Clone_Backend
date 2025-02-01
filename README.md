@@ -67,7 +67,7 @@ Status Codes
 
 ## User Login Endpoint
 
-`POST /user/login`
+`POST /users/login`
 
 ## Description
 
@@ -125,3 +125,53 @@ Status Codes
 401: Invalid email or password.
 400: Validation errors.
 ```
+
+## User Profile Endpoint
+
+`GET /user/profile`
+
+## Description
+
+This endpoint allows authenticated users to retrieve their profile information.
+
+## Request
+
+No request body is required for this endpoint. The user must be authenticated.
+
+## Response
+
+- **200 OK**: User profile retrieved successfully.
+
+  - Response body:
+    ```json
+    {
+      "user": {
+        "firstName": "John",
+        "lastName": "Doe",
+        "email": "user@example.com"
+      }
+    }
+    ```
+
+- **401 Unauthorized**: User is not authenticated.
+
+  - Response body:
+    ```json
+    {
+      "message": "Unauthorized"
+    }
+    ```
+
+- **500 Internal Server Error**: An error occurred while verifying the token.
+  - Response body:
+    ```json
+    {
+      "error": "Error message"
+    }
+    ```
+
+## Status Codes
+
+- **200**: User profile retrieved successfully.
+- **401**: User is not authenticated.
+- **500**: An error occurred while processing the request.
