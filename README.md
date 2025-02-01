@@ -128,7 +128,7 @@ Status Codes
 
 ## User Profile Endpoint
 
-`GET /user/profile`
+`GET /users/profile`
 
 ## Description
 
