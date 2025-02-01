@@ -3,11 +3,18 @@ dotenv.config();
 const express = require("express");
 const cors = require("cors");
 const app = express();
+const connectToDb = require("./db/db");
+const userRoutes = require("./routes/user.routes");
 
+connectToDb();
 app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 app.get("/", (req, res) => {
-  res.send(`<h1>Hello There !!`);
+  res.send(`<center><h1>Welcome to Uber clone !!</h1></center`);
 });
+
+app.use("/users", userRoutes);
 
 module.exports = app;
