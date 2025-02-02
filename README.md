@@ -240,3 +240,97 @@ No request body is required for this endpoint. The user must be authenticated.
 - **200**: User profile retrieved successfully.
 - **401**: User is not authenticated.
 - **500**: An error occurred while processing the request.
+
+## Captains Registration Endpoint
+
+`POST /captains/register`
+
+## Description
+
+This endpoint allows a new captain to register in the system. It validates the input data and creates a new captain record if the data is valid and the captain does not already exist.
+
+## Request
+
+- **Method**: POST
+- **URL**: `/captains/register`
+
+### Request Body
+
+The request body must be a JSON object containing the following fields:
+
+```json
+{
+  "fullName": {
+    "firstName": "string (min: 3 characters)",
+    "lastName": "string (min: 3 characters)"
+  },
+  "email": "string (valid email address)",
+  "password": "string (min: 6 characters)",
+  "vehicle": {
+    "color": "string (min: 3 characters)",
+    "plate": "string (min: 3 characters)",
+    "capacity": "integer (min: 1)",
+    "type": "string (must be one of: car, motorcycle, auto)"
+  }
+}
+```
+
+### Validation Rules
+
+- `fullName.firstName`: Must be at least 3 characters long.
+- `fullName.lastName`: Must be at least 3 characters long.
+- `email`: Must be a valid email address.
+- `password`: Must be at least 6 characters long.
+- `vehicle.color`: Must be at least 3 characters long.
+- `vehicle.plate`: Must be at least 3 characters long.
+- `vehicle.capacity`: Must be an integer with a minimum value of 1.
+- `vehicle.type`: Must be one of the following: "car", "motorcycle", "auto".
+
+## Response
+
+On success, the response will be a JSON object with the following structure:
+
+```json
+{
+  "message": "captain created",
+  "captain": {
+    "firstName": "string",
+    "lastName": "string",
+    "email": "string",
+    "vehicle": {
+      "color": "string",
+      "plate": "string",
+      "capacity": "integer",
+      "type": "string"
+    }
+  },
+  "token": "string (JWT token)"
+}
+```
+
+### Possible Error Responses
+
+- **400 Bad Request**: If validation fails or if the captain already exists.
+  - Example:
+  ```json
+  {
+    "errors": [
+      {
+        "msg": "First name must be at least 3 characters long",
+        "param": "fullName.firstName",
+        "location": "body"
+      }
+    ]
+  }
+  ```
+- **500 Internal Server Error**: If an unexpected error occurs during registration.
+  - Example:
+  ```json
+  {
+    "error": "Error message"
+  }
+  ```
+
+## Notes
+
+Ensure that all required fields are provided and valid to successfully register a captain.
