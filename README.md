@@ -275,17 +275,6 @@ The request body must be a JSON object containing the following fields:
 }
 ```
 
-### Validation Rules
-
-- `fullName.firstName`: Must be at least 3 characters long.
-- `fullName.lastName`: Must be at least 3 characters long.
-- `email`: Must be a valid email address.
-- `password`: Must be at least 6 characters long.
-- `vehicle.color`: Must be at least 3 characters long.
-- `vehicle.plate`: Must be at least 3 characters long.
-- `vehicle.capacity`: Must be an integer with a minimum value of 1.
-- `vehicle.type`: Must be one of the following: "car", "motorcycle", "auto".
-
 ## Response
 
 On success, the response will be a JSON object with the following structure:
