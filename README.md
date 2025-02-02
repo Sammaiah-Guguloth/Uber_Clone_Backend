@@ -1,6 +1,6 @@
-# BACKEND API's DOCUMENTATION
+# API's DOCUMENTATION
 
-## User Registeration Endpoint
+## Users Registration Endpoint
 
 `POST /users/register`
 
@@ -29,43 +29,51 @@ The request body must be in JSON format and include the following fields:
   },
   "password": "securepassword"
 }
-Response
-201 Created: User successfully registered.
-
-Response body:
-{
-  "user": {
-    "firstName": "John",
-    "lastName": "Doe",
-    "email": "user@example.com"
-  },
-  "token": "generated_auth_token"
-}
-400 Bad Request: Validation errors occurred.
-
-Response body:
-{
-  "errors": [
-    {
-      "msg": "Invalid Email",
-      "param": "email"
-    },
-    {
-      "msg": "First name should be min 3 characters long",
-      "param": "fullName.firstName"
-    },
-    {
-      "msg": "Password should be of min 6 characters",
-      "param": "password"
-    }
-  ]
-}
-Status Codes
-201: User created successfully.
-400: Validation errors.
 ```
 
-## User Login Endpoint
+## Response
+
+- **201 Created**: User successfully registered.
+
+  - Response body:
+    ```json
+    {
+      "user": {
+        "firstName": "John",
+        "lastName": "Doe",
+        "email": "user@example.com"
+      },
+      "token": "generated_auth_token"
+    }
+    ```
+
+- **400 Bad Request**: Validation errors occurred.
+  - Response body:
+    ```json
+    {
+      "errors": [
+        {
+          "msg": "Invalid Email",
+          "param": "email"
+        },
+        {
+          "msg": "First name should be min 3 characters long",
+          "param": "fullName.firstName"
+        },
+        {
+          "msg": "Password should be of min 6 characters",
+          "param": "password"
+        }
+      ]
+    }
+    ```
+
+## Status Codes
+
+- **201**: User created successfully.
+- **400**: Validation errors.
+
+## Users Login Endpoint
 
 `POST /users/login`
 
@@ -87,46 +95,103 @@ The request body must be in JSON format and include the following fields:
   "email": "user@example.com",
   "password": "securepassword"
 }
-Response
-200 OK: User successfully logged in.
-
-Response body:
-{
-  "user": {
-    "firstName": "John",
-    "lastName": "Doe",
-    "email": "user@example.com"
-  },
-  "token": "generated_auth_token"
-}
-401 Unauthorized: Invalid email or password.
-
-Response body:
-{
-  "message": "Invalid email or password"
-}
-400 Bad Request: Validation errors occurred.
-
-Response body:
-{
-  "errors": [
-    {
-      "msg": "Invalid email",
-      "param": "email"
-    },
-    {
-      "msg": "Password should be of min 6 characters",
-      "param": "password"
-    }
-  ]
-}
-Status Codes
-200: User logged in successfully.
-401: Invalid email or password.
-400: Validation errors.
 ```
 
-## User Profile Endpoint
+## Response
+
+- **200 OK**: User successfully logged in.
+
+  - Response body:
+    ```json
+    {
+      "user": {
+        "firstName": "John",
+        "lastName": "Doe",
+        "email": "user@example.com"
+      },
+      "token": "generated_auth_token"
+    }
+    ```
+
+- **401 Unauthorized**: Invalid email or password.
+
+  - Response body:
+    ```json
+    {
+      "message": "Invalid email or password"
+    }
+    ```
+
+- **400 Bad Request**: Validation errors occurred.
+  - Response body:
+    ```json
+    {
+      "errors": [
+        {
+          "msg": "Invalid email",
+          "param": "email"
+        },
+        {
+          "msg": "Password should be of min 6 characters",
+          "param": "password"
+        }
+      ]
+    }
+    ```
+
+## Status Codes
+
+- **200**: User logged in successfully.
+- **401**: Invalid email or password.
+- **400**: Validation errors.
+
+## Users Logout Endpoint
+
+`GET /users/logout`
+
+## Description
+
+This endpoint allows authenticated users to log out by invalidating their authentication token.
+
+## Request
+
+No request body is required for this endpoint. The user must be authenticated.
+
+## Response
+
+- **200 OK**: User logged out successfully.
+
+  - Response body:
+    ```json
+    {
+      "message": "User logged out successfully"
+    }
+    ```
+
+- **401 Unauthorized**: User is not authenticated.
+
+  - Response body:
+    ```json
+    {
+      "message": "Unauthorized"
+    }
+    ```
+
+- **500 Internal Server Error**: An error occurred while processing the logout.
+  - Response body:
+    ```json
+    {
+      "error": "Error message"
+    }
+    ```
+
+## Status Codes
+
+- **200**: User logged out successfully.
+- **401**: User is not authenticated.
+- **500**: An error occurred while processing the request.
+
+## Users Profile Endpoint
 
 `GET /users/profile`
 
