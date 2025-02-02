@@ -320,6 +320,75 @@ On success, the response will be a JSON object with the following structure:
   }
   ```
 
-## Notes
+## Captains Login Endpoint
 
-Ensure that all required fields are provided and valid to successfully register a captain.
+`POST /captains/login`
+
+### Request Body
+
+```json
+{
+  "email": "string (valid email)",
+  "password": "string (min: 6 characters)"
+}
+```
+
+### Responses
+
+- **201 Created**:
+
+```json
+{
+  "message": "captain logged in",
+  "captain": { "firstName": "string", "lastName": "string", "email": "string" },
+  "token": "string (JWT)"
+}
+```
+
+- **400 Bad Request**:
+
+```json
+{ "message": "email and password are required" }
+```
+
+- **401 Unauthorized**:
+
+```json
+{ "message": "Invalid email or password" }
+```
+
+## Captains Profile Endpoint
+
+`GET /captains/profile`
+
+### Responses
+
+- **200 OK**:
+
+```json
+{
+  "captain": { "firstName": "string", "lastName": "string", "email": "string" }
+}
+```
+
+- **Note**: Requires authentication via token.
+
+## Captains Logout Endpoint
+
+`GET /captains/logout`
+
+### Responses
+
+- **200 OK**:
+
+```json
+{ "message": "Captain logged out successfully" }
+```
+
+- **401 Unauthorized**:
+
+```json
+{ "message": "Unauthorized" }
+```
+
+- **Note**: Clears the token from cookies.

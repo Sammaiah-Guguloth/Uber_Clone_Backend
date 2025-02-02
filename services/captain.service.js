@@ -24,7 +24,7 @@ module.exports.createCaptain = async ({
   }
 
   try {
-    const captain = captainModel.create({
+    const captain = await captainModel.create({
       fullName: {
         firstName,
         lastName,
